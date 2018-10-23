@@ -1,0 +1,46 @@
+package br.org.laramara.usse.testes.dominio;
+
+import br.org.laramara.usse.dominio.Servidor;
+import br.org.laramara.usse.fabricas.ContextoServidor;
+import br.org.laramara.usse.utilitarios.Relogio;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author leone.pizzoli
+ */
+public class ServidorTeste {
+    
+    @Test
+    public void servidor_esta_com_data_compra_valida(){
+        Servidor server = new Servidor();
+        server = ContextoServidor.criarServidorComTodosOsDadosCorretos();
+        
+        assertEquals(Relogio.validarData(server.getDataCompra()), true);
+    }
+    
+    @Test
+    public void servidor_esta_com_ultima_manutencao_valida(){
+        Servidor server = new Servidor();
+        server = ContextoServidor.criarServidorComTodosOsDadosCorretos();
+        
+        assertEquals(Relogio.validarData(server.getUltimaManutencao()), true);
+    }
+    
+    @Test
+    public void servidor_esta_com_dados_corretos(){
+        Servidor server = new Servidor();
+        server = ContextoServidor.criarServidorComTodosOsDadosCorretos();
+        
+        assertNotNull(server);
+    }
+   
+    @Test
+    public void servidor_esta_com_dados_incorretos(){
+        Servidor server = new Servidor();
+        server = ContextoServidor.criarServidorComTodosOsDadosIncorretos();
+        
+        assertNull(server);
+    }
+}

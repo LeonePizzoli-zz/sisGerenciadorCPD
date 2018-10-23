@@ -1,0 +1,103 @@
+package br.org.laramara.usse.controladores;
+
+import br.org.laramara.usse.dominio.Equipamento;
+import br.org.laramara.usse.modelos.ModeloTabela;
+import br.org.laramara.usse.repositorios.RepositorioEquipamento;
+import br.org.laramara.usse.repositorios.RepositorioServidor;
+import br.org.laramara.usse.telas.TelaEditarEquipamento;
+import br.org.laramara.usse.utilitarios.TabelaUtils;
+import br.org.laramara.usse.utilitarios.TextoUtils;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+public class ControladorTelaGerenciarEquipamento extends ControladorTela {
+
+    public Equipamento equipDTO;
+    private JInternalFrame telaGerenciarEquipamentos;
+    private JComboBox<String> jcbPesquisa;
+    private JButton jbuPesquisar, jbuFechar, jbuBuscaEspecifica;
+    private JTextField jtfBuscaEspecifica;
+    private JTable jtaPesquisaEquipamentos;
+    private RepositorioEquipamento repositorioEquipamento;
+    private RepositorioServidor repositorioServidor;
+    TelaEditarEquipamento telaEditarEquipamento;
+    private List<Equipamento> listaEquipamento = null;
+    private JDesktopPane desktop;
+    private JFrame telaPrincipal;
+    public ControladorTelaGerenciarEquipamento(JFrame telaPrincipal, JDesktopPane desktop, JInternalFrame telaGerenciarEquipamentos, JComboBox<String> jcbPesquisa,
+            JButton jbuPesquisar, JButton jbuFechar, JTextField jtfBuscaNaTabela, JTable jtaPesquisaEquipamentos, TelaEditarEquipamento telaEditarEquipamento) {
+        super(telaPrincipal, desktop);
+        this.telaGerenciarEquipamentos = telaGerenciarEquipamentos;
+        this.jcbPesquisa = jcbPesquisa;
+        this.jbuPesquisar = jbuPesquisar;
+        this.jbuFechar = jbuFechar;
+        this.jbuBuscaEspecifica = jbuBuscaEspecifica;
+        this.jtfBuscaEspecifica = jtfBuscaNaTabela;
+        this.jtaPesquisaEquipamentos = jtaPesquisaEquipamentos;
+        repositorioEquipamento = new RepositorioEquipamento();
+        repositorioServidor = new RepositorioServidor();
+        this.telaEditarEquipamento = telaEditarEquipamento;
+        this.telaPrincipal = telaPrincipal;
+        this.desktop = desktop;
+    }
+    
+
+    protected ModeloTabela obterModeloTabela(JTable tabela) {
+        return ((ModeloTabela) tabela.getModel());
+    }
+
+    private void configurarColunasTabela() {
+        TabelaUtils.configurarTamanhoERenderizadorDeColunas(jtaPesquisaEquipamentos);
+    }
+
+    public List<Equipamento> obterListaServidor() {
+
+        List<Equipamento> resultadoServidores = repositorioServidor.listarServidorPorID();
+        return resultadoServidores;
+
+    }
+
+    public void pesquisarResultados() {
+        obterModeloTabela(jtaPesquisaEquipamentos).limparDados();
+        String busca = jtfBuscaEspecifica.getText();
+        String tipoEquipamento = jcbPesquisa.getSelectedItem().toString();
+        
+        if (tipoEquipamento.equals("Servidor") && !TextoUtils.estaVazio(jtfBuscaEspecifica.getText())) {
+            listaEquipamento = repositorioServidor.listarEquipamentoPorBuscaEspecifica(busca);  
+            
+        for (Equipamento equipamento : listaEquipamento) {
+                obterModeloTabela(jtaPesquisaEquipamentos).adicionarDado(equipamento);
+            }
+            configurarColunasTabela();
+            }
+            if(tipoEquipamento.equals("Servidor") && TextoUtils.estaVazio(jtfBuscaEspecifica.getText())){
+                listaEquipamento = obterListaServidor();
+                
+            for (Equipamento equipamento : listaEquipamento) {
+                obterModeloTabela(jtaPesquisaEquipamentos).adicionarDado(equipamento);
+            }
+            configurarColunasTabela();
+            }
+        if (tipoEquipamento.equals("Roteador") && jtfBuscaEspecifica.getText().equals("")) {
+            
+        }
+        if (tipoEquipamento.equals("Switch") && jtfBuscaEspecifica.getText().equals("")) {
+        }
+    }
+
+    public void fecharTela() {
+        
+        telaGerenciarEquipamentos.doDefaultCloseAction();
+
+    }
+
+    public void alterar() {
+        fecharTela();
+    }
+}

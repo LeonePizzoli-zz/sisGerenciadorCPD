@@ -1,0 +1,90 @@
+package br.org.laramara.usse.fabricas;
+
+import br.org.laramara.usse.dominio.Equipamento;
+import br.org.laramara.usse.dominio.Servidor;
+import br.org.laramara.usse.utilitarios.DataHoraUtils;
+import br.org.laramara.usse.utilitarios.Relogio;
+
+/**
+ *
+ * @author leone.pizzoli
+ */
+public class ContextoServidor {
+    public static Servidor criarServidorComTodosOsDadosCorretos(){
+        Servidor servidor =  new Servidor();
+        int tempoGarantia = 1;
+        try{
+                servidor.setQuantidadeVMs(1);
+                servidor.setServiceTag("abcde");
+                servidor.setNome("Servidor - Teste");
+                servidor.setSistemaOperacional("Windows Server");
+                servidor.setEnderecoIP("10.10.10.103");
+                servidor.setDataCadastro(Relogio.obterDataHoraAtual());
+                servidor.setDataCompra(Relogio.criarDataHoraSemHora("05/03/2018"));
+                servidor.setModelo("154");
+                servidor.setMarca("Dell");
+                servidor.setCapacidadeMemoria("12GB");
+                servidor.setExpressServiceTag(1234);
+                servidor.setMemoriaInstalada("8GB");
+                servidor.setProcessador("Core 2 Duo");
+                servidor.setQuantidadeFonte(1);
+                servidor.setQuantidadeNucleosProcessador(8);
+                servidor.setRaid(100);
+                servidor.setSlotsRede(2);
+                servidor.setTipoServidor("Gaveta");
+                servidor.setVersaoBios("abcde");
+                servidor.setQuantidadeHD(2);
+                servidor.setEspacoArmazenamento("5TB");
+                servidor.setVersaoSistemaOperacional("Win 2002");
+                servidor.setTipoEquipamento("Servidor");
+                servidor.setSenha("1234");
+                servidor.setUsuario("leone.pizzoli");
+                if(true == DataHoraUtils.validarData("26/12/1996"))
+                servidor.setUltimaManutencao(DataHoraUtils.criarDataHoraSemHora("26/12/1996"));
+                if(tempoGarantia != 0)
+                servidor.setTempoGarantia(tempoGarantia);
+        }catch(Exception e){
+            servidor = null;
+        }
+        return servidor;
+    }
+    
+    public static Servidor criarServidorComTodosOsDadosIncorretos(){
+        Servidor servidor =  new Servidor();
+        int tempoGarantia = 0;
+        try{
+                servidor.setQuantidadeVMs(0);
+                servidor.setServiceTag("");
+                servidor.setNome("");
+                servidor.setSistemaOperacional("");
+                servidor.setEnderecoIP("");
+                servidor.setDataCadastro(Relogio.obterDataInvalida());
+                servidor.setDataCompra(Relogio.criarDataHoraSemHora("15/03/2018"));
+                servidor.setModelo("");
+                servidor.setMarca("");
+                servidor.setCapacidadeMemoria("");
+                servidor.setExpressServiceTag(0);
+                servidor.setMemoriaInstalada("");
+                servidor.setProcessador("");
+                servidor.setQuantidadeFonte(0);
+                servidor.setQuantidadeNucleosProcessador(0);
+                servidor.setRaid(-1);
+                servidor.setSlotsRede(0);
+                servidor.setTipoServidor("");
+                servidor.setVersaoBios("");
+                servidor.setQuantidadeHD(0);
+                servidor.setEspacoArmazenamento("");
+                servidor.setVersaoSistemaOperacional("");
+                servidor.setTipoEquipamento("");
+                servidor.setSenha("");
+                servidor.setUsuario("");
+                if(true == DataHoraUtils.validarData("10/05/2012"))
+                servidor.setUltimaManutencao(DataHoraUtils.criarDataHoraSemHora("10/05/2012"));
+                if(tempoGarantia != 0)
+                servidor.setTempoGarantia(tempoGarantia);
+        }catch(Exception e){
+            servidor = null;
+        }
+        return servidor;
+    }
+}

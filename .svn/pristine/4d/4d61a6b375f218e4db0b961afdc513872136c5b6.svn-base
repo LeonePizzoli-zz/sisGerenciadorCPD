@@ -1,0 +1,42 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.org.laramara.usse.testes.dominio;
+
+import br.org.laramara.usse.dominio.Servidor;
+import br.org.laramara.usse.utilitarios.DataHoraUtils;
+import br.org.laramara.usse.utilitarios.Relogio;
+import java.time.LocalDateTime;
+import junit.framework.Assert;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author leone.pizzoli
+ */
+public class ServidorTeste {
+    
+    @Test
+    public void esta_com_data_compra_valida(){
+        Servidor server = new Servidor();
+        server.setDataCompra(Relogio.mudarDataHoraAtual("10/12/2016 00:00:00"));
+        LocalDateTime dataCompra = server.getDataCompra();
+        assertEquals(Relogio.obterDataHoraAtual(), dataCompra);
+    }
+    
+    @Test
+    public void esta_com_data_invalida(){
+        assertFalse(Relogio.validarData("10/12/201  00:00:00"));
+    }
+    
+    
+    
+    
+}

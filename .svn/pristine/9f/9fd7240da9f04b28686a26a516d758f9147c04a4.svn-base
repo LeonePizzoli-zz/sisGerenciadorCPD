@@ -1,0 +1,108 @@
+package br.org.laramara.usse.modelos;
+
+import br.org.laramara.usse.dominio.Equipamento;
+import br.org.laramara.usse.dominio.Roteador;
+import br.org.laramara.usse.dominio.Servidor;
+import br.org.laramara.usse.utilitarios.DataHoraUtils;
+
+/**
+ *
+ * @author rubens.leme
+ */
+public class ModeloTabelaEquipamento extends ModeloTabela<Equipamento> {
+
+    Long expressServiceTag;
+    String serviceTag;
+    Integer portaAcesso;
+    String deptoInstalacao;
+    String quantidadeVms;
+    String dataManutencao;
+    int tempoGarantia;
+    String sistemaOperacional;
+    String versaoSistemaOperacional;
+    String memoriaInstalada;
+    String capacidadeMemoria;
+    int quantidadeHD;
+    String espacoArmazenamento;
+    String processador;
+    Integer quantidadeNucleos;
+    Integer raid;
+    String tipoServidor;
+    Integer quantidadeFontes;
+    Integer slotsRede;
+    String versaoBios;
+
+    public ModeloTabelaEquipamento() {
+        super(new String[]{"Nome Equipamento", "EnderecoIP", "Marca", "Modelo", "Data Cadastro", "Data Compra", "Tempo garantia", "Usuario", "Senha", "Sistema Operacional", "Versão S.O", "Quantidade Vms", "ServiceTag", "Express ServiceTag", "Data Manutencao", "Memoria Instalada", "Capacidade Memoria", "Quantidade HD", "Espaço Armazenamento", "Processador", "Quantidade Núcleos", "Raid", "Tipo Servidor", "Fontes", "Slots Rede", "Versão Bios"},
+                new Class[]{String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, Integer.class, String.class, Integer.class, String.class, String.class, String.class, Integer.class, String.class, String.class, Integer.class, Integer.class, String.class, Integer.class, String.class, String.class},
+                new int[]{80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80});
+    }
+
+    @Override
+    public void adicionarDado(Equipamento equipamento) {
+        Long id = equipamento.getId();
+
+        String nomeEquipamento = equipamento.getNome();
+        String marca = equipamento.getMarca();
+        String modelo = equipamento.getModelo();
+        String dataCadastro = DataHoraUtils.formatarData(equipamento.getDataCadastro());
+        String dataCompra = DataHoraUtils.formatarData(equipamento.getDataCompra());
+        String enderecaoIP = equipamento.getEnderecoIP();
+        String usuario = equipamento.getUsuario();
+        String senha = equipamento.getSenha();
+
+        if (equipamento.getTipoEquipamento().equals("Servidor")) {
+            sistemaOperacional = ((Servidor) equipamento).getSistemaOperacional();
+            versaoSistemaOperacional = ((Servidor) equipamento).getVersaoSistemaOperacional();
+            quantidadeVms = ((Servidor) equipamento).getQuantidadeVMs().toString();
+            serviceTag = ((Servidor) equipamento).getServiceTag();
+            expressServiceTag = ((Servidor) equipamento).getExpressServiceTag();
+            dataManutencao = DataHoraUtils.formatarData(((Servidor) equipamento).getUltimaManutencao());
+            memoriaInstalada = ((Servidor) equipamento).getMemoriaInstalada();
+            capacidadeMemoria = ((Servidor) equipamento).getCapacidadeMemoria();
+            quantidadeHD = ((Servidor) equipamento).getQuantidadeHD();
+            espacoArmazenamento = ((Servidor) equipamento).getEspacoArmazenamento();
+            processador = ((Servidor) equipamento).getProcessador();
+            quantidadeNucleos = ((Servidor) equipamento).getQuantidadeNucleosProcessador();
+            raid = ((Servidor) equipamento).getRaid();
+            tipoServidor = ((Servidor) equipamento).getTipoServidor();
+            quantidadeFontes = ((Servidor) equipamento).getQuantidadeFonte();
+            slotsRede = ((Servidor) equipamento).getSlotsRede();
+            versaoBios = ((Servidor) equipamento).getVersaoBios();
+            tempoGarantia = ((Servidor) equipamento).getTempoGarantia();
+        }
+        if (equipamento instanceof Roteador) {
+            portaAcesso = ((Roteador) equipamento).getPortaAcesso();
+            deptoInstalacao = ((Roteador) equipamento).getDeptoInstalacao();
+        }
+        addRow(new Object[]{
+            nomeEquipamento,
+            enderecaoIP,
+            marca,
+            modelo,
+            dataCadastro,
+            dataCompra,
+            tempoGarantia,
+            usuario,
+            senha,
+            sistemaOperacional,
+            versaoSistemaOperacional,
+            quantidadeVms,
+            serviceTag,
+            expressServiceTag,
+            dataManutencao,
+            memoriaInstalada,
+            capacidadeMemoria,
+            quantidadeHD,
+            espacoArmazenamento,
+            processador,
+            quantidadeNucleos,
+            raid,
+            tipoServidor,
+            quantidadeFontes,
+            slotsRede,
+            versaoBios
+        });
+    }
+
+}

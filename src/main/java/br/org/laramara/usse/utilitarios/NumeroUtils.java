@@ -1,0 +1,85 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.org.laramara.usse.utilitarios;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ *
+ * @author leone.pizzoli
+ */
+public class NumeroUtils {
+
+    public static Integer obterNumeroInteiroInvalido(String valor) {
+        return !valor.isEmpty() ? Integer.parseInt(valor) : new Integer(999999999);
+    }
+
+    public static Integer obterNumeroInteiroInvalido() {
+        return new Integer(999999999);
+    }
+    
+    public static Long obterNumeroLongInvalido(){
+        return new Long(999999999);
+    }
+
+    public static Integer obterNumeroAPartirDeString(String valor) {
+        return !valor.isEmpty() ? Integer.parseInt(valor) : new Integer(0);
+    }
+
+    public static Long obterNumeroLongInvalido(String valor) {
+        if (!valor.isEmpty()) {
+            return Long.parseLong(valor);
+        }
+        return new Long(999999999);
+    }
+
+    public static boolean estaVazio(String texto) {
+        return texto.isEmpty();
+    }
+
+    public static boolean numeroInteiroInvalido(Integer numero) {
+        return (numero != null && numero.equals(obterNumeroInteiroInvalido()));
+    }
+    
+    public static boolean numeroLongInvalido(Long numero) {
+        return (numero != null && numero.equals(obterNumeroLongInvalido()));
+    }
+
+    public static Long retornaLongOuInvalido(String texto) {
+        Long retorno;
+        if (texto != null && !TextoUtils.estaVazio(texto)) {
+            Pattern padraoApenasNumeros = Pattern.compile("[0-9]*");
+            if (((Matcher) padraoApenasNumeros.matcher(TextoUtils
+                    .removerCaracteresInvalidos(texto))).matches()) {
+                retorno = new Long(
+                        TextoUtils.removerCaracteresInvalidos(texto));
+            } else {
+                retorno = obterNumeroLongInvalido();
+            }
+        } else {
+            retorno = null;
+        }
+        return retorno;
+    }
+
+    public static Integer retornaInteiroOuInvalido(String texto) {
+        Integer retorno;
+        if (texto != null && !TextoUtils.estaVazio(texto)) {
+            Pattern padraoApenasNumeros = Pattern.compile("[0-9]*");
+            if (((Matcher) padraoApenasNumeros.matcher(TextoUtils
+                    .removerCaracteresInvalidos(texto))).matches()) {
+                retorno = new Integer(
+                        TextoUtils.removerCaracteresInvalidos(texto));
+            } else {
+                retorno = obterNumeroInteiroInvalido();
+            }
+        } else {
+            retorno = null;
+        }
+        return retorno;
+    }
+}

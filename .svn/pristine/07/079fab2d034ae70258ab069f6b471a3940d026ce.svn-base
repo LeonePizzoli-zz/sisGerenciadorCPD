@@ -1,0 +1,240 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.org.laramara.usse.dominio;
+
+import br.org.laramara.usse.utilitarios.LocalDateTimeConverter;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+
+/**
+ *
+ * @author rubens.leme
+ */
+
+@Entity(name = "Servidor")
+public class Servidor extends Equipamento implements Serializable {
+   
+    
+    
+    
+    @Column(length = 35, nullable = true)
+    private String memoriaInstalada;
+    
+    @Column(length = 35, nullable = true)
+    private String capacidadeMemoria;
+    
+    @Column(length = 35, nullable = true)
+    private String processador;
+    
+    @Column(length = 35, nullable = true)
+    private int quantidadeNucleosProcessador;
+    
+    @Column(length = 35, nullable = true)
+    private String serviceTag;
+    
+    @Column(length = 35, nullable = true)
+    private int expressServiceTag;
+    
+    @Column(length = 35, nullable = true)
+    private int raid;
+    
+    @Column(length = 35, nullable = true)
+    private String tipoServidor;
+
+    @Column(length = 35, nullable = true)
+    private int quantidadeFonte;
+
+    @Column(length = 35, nullable = true)
+    private int slotsRede;
+
+    @Column(length = 35, nullable = true)
+    private int quantidadeHD;
+
+    @Column(length = 35, nullable = true)
+    private String versaoBios;
+    
+    @Column(length = 3, nullable = true)
+    private Integer quantidadeVMs;
+    
+    @Column(length = 35, nullable = true)
+    private String espacoArmazenamento;
+    
+    @Column
+    @Convert(converter = LocalDateTimeConverter.class)
+    private LocalDateTime ultimaManutencao;
+    
+    @Column(length = 30, nullable = false)
+    private String sistemaOperacional;
+    
+    @Column(length = 30, nullable = false)
+    private String versaoSistemaOperacional;
+    
+    @Column(length = 6, nullable = false)
+    private int tempoGarantia;
+    
+    public Servidor() {
+    }
+
+    public Servidor(LocalDateTime dataCadastro, LocalDateTime dataCompra, String nomeServidor, String marca, String modelo, String enderecoIP, String tipoEquipamento, String usuario, String senha) {
+        super(dataCadastro, dataCompra, nomeServidor, marca, modelo, enderecoIP, tipoEquipamento, usuario, senha);
+    }
+
+    public String getServiceTag() {
+        return serviceTag;
+    }
+
+    public void setServiceTag(String serviceTag) {
+        this.serviceTag = serviceTag;
+    }
+
+    public String getMemoriaInstalada() {
+        return memoriaInstalada;
+    }
+
+    public void setMemoriaInstalada(String memoriaInstalada) {
+        this.memoriaInstalada = memoriaInstalada;
+    }
+
+    public String getCapacidadeMemoria() {
+        return capacidadeMemoria;
+    }
+
+    public void setCapacidadeMemoria(String capacidadeMemoria) {
+        this.capacidadeMemoria = capacidadeMemoria;
+    }
+
+    public String getProcessador() {
+        return processador;
+    }
+
+    public void setProcessador(String processador) {
+        this.processador = processador;
+    }
+
+    public int getQuantidadeNucleosProcessador() {
+        return quantidadeNucleosProcessador;
+    }
+
+    public void setQuantidadeNucleosProcessador(int quantidadeNucleosProcessador) {
+        this.quantidadeNucleosProcessador = quantidadeNucleosProcessador;
+    }
+
+    public int getExpressServiceTag() {
+        return expressServiceTag;
+    }
+
+    public void setExpressServiceTag(int expressServiceTag) {
+        this.expressServiceTag = expressServiceTag;
+    }
+
+    public int getRaid() {
+        return raid;
+    }
+
+    public void setRaid(int raid) {
+        this.raid = raid;
+    }
+
+    public String getTipoServidor() {
+        return tipoServidor;
+    }
+
+    public void setTipoServidor(String tipoServidor) {
+        this.tipoServidor = tipoServidor;
+    }
+
+    public int getQuantidadeFonte() {
+        return quantidadeFonte;
+    }
+
+    public void setQuantidadeFonte(int quantidadeFonte) {
+        this.quantidadeFonte = quantidadeFonte;
+    }
+
+    public int getSlotsRede() {
+        return slotsRede;
+    }
+
+    public void setSlotsRede(int slotsRede) {
+        this.slotsRede = slotsRede;
+    }
+
+    public int getQuantidadeHD() {
+        return quantidadeHD;
+    }
+
+    public void setQuantidadeHD(int quantidadeHD) {
+        this.quantidadeHD = quantidadeHD;
+    }
+
+    public String getVersaoBios() {
+        return versaoBios;
+    }
+
+    public void setVersaoBios(String versaoBios) {
+        this.versaoBios = versaoBios;
+    }
+
+    public Integer getQuantidadeVMs() {
+        return quantidadeVMs;
+    }
+
+    public void setQuantidadeVMs(Integer quantidadeVMs) {
+        this.quantidadeVMs = quantidadeVMs;
+    }
+
+    public LocalDateTime getUltimaManutencao() {
+        return ultimaManutencao;
+    }
+
+    public void setUltimaManutencao(LocalDateTime ultimaManutencao) {
+        this.ultimaManutencao = ultimaManutencao;
+    }
+
+    public String getSistemaOperacional() {
+        return sistemaOperacional;
+    }
+
+    public void setSistemaOperacional(String sistemaOperacional) {
+        this.sistemaOperacional = sistemaOperacional;
+    }
+
+    public String getEspacoArmazenamento() {
+        return espacoArmazenamento;
+    }
+
+    public void setEspacoArmazenamento(String espacoArmazenamento) {
+        this.espacoArmazenamento = espacoArmazenamento;
+    }
+
+    public String getVersaoSistemaOperacional() {
+        return versaoSistemaOperacional;
+    }
+
+    public void setVersaoSistemaOperacional(String versaoSistemaOperacional) {
+        this.versaoSistemaOperacional = versaoSistemaOperacional;
+    }
+
+    public int getTempoGarantia() {
+        return tempoGarantia;
+    }
+
+    public void setTempoGarantia(int tempoGarantia) {
+        this.tempoGarantia = tempoGarantia;
+    }
+
+    @Override
+    public String toString() {
+        return "Servidor{" + "memoriaInstalada=" + memoriaInstalada + ", capacidadeMemoria=" + capacidadeMemoria + ", processador=" + processador + ", quantidadeNucleosProcessador=" + quantidadeNucleosProcessador + ", serviceTag=" + serviceTag + ", expressServiceTag=" + expressServiceTag + ", raid=" + raid + ", tipoServidor=" + tipoServidor + ", quantidadeFonte=" + quantidadeFonte + ", slotsRede=" + slotsRede + ", quantidadeHD=" + quantidadeHD + ", versaoBios=" + versaoBios + ", quantidadeVMs=" + quantidadeVMs + ", espacoArmazenamento=" + espacoArmazenamento + ", ultimaManutencao=" + ultimaManutencao + ", sistemaOperacional=" + sistemaOperacional + ", versaoSistemaOperacional=" + versaoSistemaOperacional + ", tempoGarantia=" + tempoGarantia + '}';
+    }
+
+    
+   
+    
+}

@@ -1,0 +1,170 @@
+package br.org.laramara.usse.modelos;
+
+import br.org.laramara.usse.dominio.Equipamento;
+import br.org.laramara.usse.dominio.Roteador;
+import br.org.laramara.usse.dominio.Servidor;
+import br.org.laramara.usse.utilitarios.DataHoraUtils;
+
+
+public class ModeloTabelaEquipamento extends ModeloTabela<Equipamento> {
+
+    String expressServiceTag;
+    String serviceTag;
+    String portaAcesso;
+    String deptoInstalacao;
+    String quantidadeVms;
+    String dataManutencao;
+    String tempoGarantia;
+    String sistemaOperacional;
+    String versaoSistemaOperacional;
+    String memoriaInstalada;
+    String capacidadeMemoria;
+    String quantidadeHD;
+    String espacoArmazenamento;
+    String processador;
+    String quantidadeNucleos;
+    String raid;
+    String tipoServidor;
+    String quantidadeFontes;
+    String slotsRede;
+    String versaoBios;
+    
+    
+    public ModeloTabelaEquipamento() {
+        super(new String[]{"Nome Equipamento", "EnderecoIP", "Empresa" , "Marca", "Modelo", "Data Cadastro", "Data Compra", "Tempo garantia", "Usuario", "Senha", "Sistema Operacional", "Versão S.O", "Quantidade Vms", "ServiceTag", "Express ServiceTag", "Data Manutencao", "Memoria Instalada", "Capacidade Memoria", "Quantidade HD", "Espaço Armazenamento", "Processador", "Quantidade Núcleos", "Raid", "Tipo Servidor", "Fontes", "Slots Rede", "Versão Bios"},
+                new Class[]{String.class, String.class, String.class ,String.class, String.class, String.class, String.class, Integer.class, String.class, String.class, String.class, String.class, Integer.class, String.class, String.class, String.class, Integer.class, Integer.class, Integer.class, String.class, String.class, Integer.class, Integer.class, String.class, Integer.class, Integer.class, String.class},
+                new int[]{80, 80, 80 ,80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80});
+    }
+
+    @Override
+    public void adicionarDado(Equipamento equipamento) {
+        Long id = equipamento.getId();
+
+        String nomeEquipamento = equipamento.getNome();
+        String marca = equipamento.getMarca();
+        String modelo = equipamento.getModelo();
+        String dataCadastro = DataHoraUtils.formatarData(equipamento.getDataCadastro());
+        String dataCompra = DataHoraUtils.formatarData(equipamento.getDataCompra());
+        String enderecaoIP = equipamento.getEnderecoIP();
+        String usuario = equipamento.getUsuario();
+        String senha = equipamento.getSenha();
+        String empresa = equipamento.getEmpresa();
+        
+        if (equipamento.getTipoEquipamento().equals("Servidor") || equipamento.getTipoEquipamento().equals("Servidor - Virtual")) {
+            sistemaOperacional = ((Servidor) equipamento).getSistemaOperacional();
+            versaoSistemaOperacional = ((Servidor) equipamento).getVersaoSistemaOperacional();
+            if(((Servidor) equipamento).getQuantidadeVMs() == null){
+                quantidadeVms = "";
+            }else{
+            quantidadeVms = ((Servidor) equipamento).getQuantidadeVMs().toString();
+            }
+            if(((Servidor) equipamento).getServiceTag() == null || ((Servidor) equipamento).getServiceTag().equals("")){
+                serviceTag = "";
+            }else{
+            serviceTag = ((Servidor) equipamento).getServiceTag();
+            }
+            if(((Servidor) equipamento).getExpressServiceTag() == null){
+                expressServiceTag = "";
+            }else{
+            expressServiceTag = ((Servidor) equipamento).getExpressServiceTag().toString();
+            }
+            dataManutencao = DataHoraUtils.formatarData(((Servidor) equipamento).getUltimaManutencao());
+            if(((Servidor) equipamento).getMemoriaInstalada() == null){
+                memoriaInstalada = "";
+            }else{
+            memoriaInstalada = ((Servidor) equipamento).getMemoriaInstalada();
+            }
+            if(((Servidor) equipamento).getCapacidadeMemoria() == null || ((Servidor) equipamento).getCapacidadeMemoria().equals("")){
+                capacidadeMemoria = "";
+            }else{
+            capacidadeMemoria = ((Servidor) equipamento).getCapacidadeMemoria();
+            }
+            if(((Servidor) equipamento).getQuantidadeHD() == null){
+                quantidadeHD = "";
+            }else{
+            quantidadeHD = ((Servidor) equipamento).getQuantidadeHD().toString();
+            }
+            if(((Servidor) equipamento).getEspacoArmazenamento() == null || ((Servidor) equipamento).getEspacoArmazenamento().equals("")){
+                espacoArmazenamento = "";
+             }else{
+            espacoArmazenamento = ((Servidor) equipamento).getEspacoArmazenamento();
+            }
+            if(((Servidor) equipamento).getProcessador() == null || ((Servidor) equipamento).getProcessador().equals("")){
+                processador = "";
+            }else{
+            processador = ((Servidor) equipamento).getProcessador();
+            }
+            if(((Servidor) equipamento).getQuantidadeNucleosProcessador() == null){
+                quantidadeNucleos = "";
+            }else{
+            quantidadeNucleos = ((Servidor) equipamento).getQuantidadeNucleosProcessador().toString();
+            }
+            if(((Servidor) equipamento).getRaid() == null || ((Servidor) equipamento).getRaid().equals("")){
+                raid = "";
+            }else{
+            raid = ((Servidor) equipamento).getRaid().toString();
+            }
+            if(((Servidor) equipamento).getTipoServidor() == null){
+                tipoServidor = "";
+            }else{
+            tipoServidor = ((Servidor) equipamento).getTipoServidor();
+            }
+            if(((Servidor) equipamento).getQuantidadeFonte() == null){
+                quantidadeFontes = "";
+            }else{
+            quantidadeFontes = ((Servidor) equipamento).getQuantidadeFonte().toString();
+            }
+            if(((Servidor) equipamento).getSlotsRede() == null){
+                slotsRede = "";
+            }else{
+            slotsRede = ((Servidor) equipamento).getSlotsRede().toString();
+            }
+            if(((Servidor) equipamento).getVersaoBios() == null){
+                versaoBios = "";
+            }else{
+            versaoBios = ((Servidor) equipamento).getVersaoBios();
+            }
+            if(((Servidor) equipamento).getTempoGarantia() == null){
+                tempoGarantia = "";
+            }else{
+                if(((Servidor) equipamento).getTempoGarantia() == 1){
+                    tempoGarantia = ((Servidor) equipamento).getTempoGarantia().toString() + " mês";                    
+                }if(((Servidor) equipamento).getTempoGarantia() > 1){
+                    tempoGarantia = ((Servidor) equipamento).getTempoGarantia().toString() + " meses";
+                }
+            }
+        }
+        if (equipamento instanceof Roteador) {
+            deptoInstalacao = ((Roteador) equipamento).getDeptoInstalacao();
+        }
+        addRow(new Object[]{
+            nomeEquipamento,
+            enderecaoIP,
+            empresa,
+            marca,
+            modelo,
+            dataCadastro,
+            dataCompra,
+            tempoGarantia,
+            usuario,
+            senha,
+            sistemaOperacional,
+            versaoSistemaOperacional,
+            quantidadeVms,
+            serviceTag,
+            expressServiceTag,
+            dataManutencao,
+            memoriaInstalada,
+            capacidadeMemoria,
+            quantidadeHD,
+            espacoArmazenamento,
+            processador,
+            quantidadeNucleos,
+            raid,
+            tipoServidor,
+            quantidadeFontes,
+            slotsRede,
+            versaoBios
+        });
+    }
+}

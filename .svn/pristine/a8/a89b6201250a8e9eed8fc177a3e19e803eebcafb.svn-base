@@ -1,0 +1,46 @@
+package br.org.laramara.usse.repositorios;
+
+import br.org.laramara.usse.dominio.Equipamento;
+import br.org.laramara.usse.dominio.Servidor;
+import br.org.laramara.usse.utilitarios.HibernateUtil;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.TypedQuery;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+/**
+ *
+ * @author leone.pizzoli
+ */
+public class RepositorioServidor extends RepositorioGenerico<Servidor>{
+   
+    public List<Equipamento> listarServidorPorID() {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        
+        Session session = factory.getCurrentSession();
+        
+        List<Equipamento> resultado = new ArrayList<Equipamento>();
+        try {
+            session.getTransaction().begin();
+            
+            TypedQuery query = session.createQuery("from Servidor s order by s.id", Servidor.class);
+            resultado = query.getResultList();
+            session.close();
+            
+            
+        } catch (RuntimeException e) {
+            System.out.println(e);
+        } finally {
+            session.close();
+        }
+        return resultado;
+    }
+    
+    public void salvarServidor(){
+        Servidor servidor = new Servidor();
+        if(servidor.getId() == null){
+            
+        }
+    }
+}

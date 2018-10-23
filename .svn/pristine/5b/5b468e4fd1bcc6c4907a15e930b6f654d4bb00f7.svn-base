@@ -1,0 +1,76 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.org.laramara.usse.fabricas;
+
+import br.org.laramara.usse.dominio.Equipamento;
+import br.org.laramara.usse.dominio.Roteador;
+import br.org.laramara.usse.dominio.Servidor;
+import br.org.laramara.usse.utilitarios.DataHoraUtils;
+import br.org.laramara.usse.utilitarios.Mensagem;
+import br.org.laramara.usse.utilitarios.Relogio;
+
+/**
+ *
+ * @author rubens.leme
+ */
+public class FabricaEquipamento {
+
+    public static Equipamento obterEquipamento(String jtfDataCompra, String jtfNomeEquipamento,
+            String jtfMarca, String jtfModelo, String jtfSistemaOperacional, String jtfEnderecoIP, String jcbTipoEquipamento,
+            String dataManutencao, Integer quantidadeVms, String serviceTag, String deptoInstalacao, int portaAcesso, String usuario, String senha,String memoriaInstalada,
+            String capacidadeMemoria, String processador, int quantidadeNucleosProcessador, int expressServiceTag, int raid, String tipoServidor, int quantidadeFonte, 
+            int slotsRede, int quantidadeHD, String versaoBios, int tempoGarantia, String espacoArmazenamento, String versaoSistemaOperacional) {
+        Equipamento equipamento = null;
+        
+        if (jcbTipoEquipamento != null) {
+            if (jcbTipoEquipamento.equals("Servidor")) {
+                equipamento = new Servidor();
+                ((Servidor) equipamento).setQuantidadeVMs(quantidadeVms);
+                ((Servidor) equipamento).setServiceTag(serviceTag);
+                ((Servidor) equipamento).setNome(jtfNomeEquipamento);
+                ((Servidor) equipamento).setSistemaOperacional(jtfSistemaOperacional);
+                ((Servidor) equipamento).setEnderecoIP(jtfEnderecoIP);
+                ((Servidor) equipamento).setDataCadastro(Relogio.obterDataHoraAtual());
+                ((Servidor) equipamento).setDataCompra(Relogio.criarDataHora(jtfDataCompra+" 00:00:00"));
+                ((Servidor) equipamento).setModelo(jtfModelo);
+                ((Servidor) equipamento).setMarca(jtfMarca);
+                ((Servidor) equipamento).setCapacidadeMemoria(capacidadeMemoria);
+                ((Servidor) equipamento).setExpressServiceTag(expressServiceTag);
+                ((Servidor) equipamento).setMemoriaInstalada(memoriaInstalada);
+                ((Servidor) equipamento).setProcessador(processador);
+                ((Servidor) equipamento).setQuantidadeFonte(quantidadeFonte);
+                ((Servidor) equipamento).setQuantidadeNucleosProcessador(quantidadeNucleosProcessador);
+                ((Servidor) equipamento).setRaid(raid);
+                ((Servidor) equipamento).setSlotsRede(slotsRede);
+                ((Servidor) equipamento).setTipoServidor(tipoServidor);
+                ((Servidor) equipamento).setVersaoBios(versaoBios);
+                ((Servidor) equipamento).setQuantidadeHD(quantidadeHD);
+                ((Servidor) equipamento).setVersaoBios(versaoBios);
+                ((Servidor) equipamento).setEspacoArmazenamento(espacoArmazenamento);
+                ((Servidor) equipamento).setVersaoSistemaOperacional(versaoSistemaOperacional);
+                if(true == DataHoraUtils.validarData(dataManutencao))
+                ((Servidor) equipamento).setUltimaManutencao(DataHoraUtils.criarDataHora(dataManutencao+" 00:00:00"));
+                if(tempoGarantia != 0)
+                ((Servidor) equipamento).setTempoGarantia(tempoGarantia);
+                
+
+            } else if (jcbTipoEquipamento.equals("Roteador")) {
+                equipamento = new Roteador();
+                ((Roteador) equipamento).setDeptoInstalacao(deptoInstalacao);
+                ((Roteador) equipamento).setPortaAcesso(portaAcesso);
+                ((Roteador) equipamento).setUsuario(usuario);
+                ((Roteador) equipamento).setSenha(senha);
+            }
+
+        } else {
+
+            Mensagem.exibirMensagem("Objeto nulo" + equipamento.getClass().getName().toString());
+        }
+       
+        return equipamento;
+    }
+
+}
